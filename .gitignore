@@ -127,3 +127,12 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# MacOS stuff
+.DS_Store
+
+# Windows stuff
+Thumbs.db
+
+# Jupyter-lsp stuff
+.virtual_documents
