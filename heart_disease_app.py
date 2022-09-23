@@ -17,8 +17,8 @@ if __name__ == '__main__':
     this streamlit app. If you think you may have a medical emergency, call 911 or go to the nearest 
     emergency room immediately. No physician-patient relationship is created by this web site or its use.
      No contributor to this web site, makes any representations, 
-     express or implied, with respect to the information provided herein or to its use. ''')
-    st.write('''Please modify the questions below to predict your likelyhood for heart disease.''')
+     express or implied, with respect to the information provided herein or to its use.''')
+    st.write('''Please modify the questions below to predict your likelihood for heart disease.''')
 
     with open('models/nn_focus.pkl', 'rb') as pickle_in:
         pipe = pickle.load(pickle_in)
@@ -100,8 +100,6 @@ if __name__ == '__main__':
         veggies = 0
 
 
-
-
     alcohol = st.radio(
     "Do you drink alcohol frequently?",
     ('Yes', 'No'), index=1)
@@ -118,11 +116,8 @@ if __name__ == '__main__':
     else:
         healthcare = 0
 
-
-
-
     noDocbcCost = st.radio(
-    "Was there a time in the past 12 months when you needed to see a doctor but could not because of cost??",
+    "Was there a time in the past 12 months when you needed to see a doctor but could not because of cost?",
     ('Yes', 'No'), index=1)
     if noDocbcCost == 'Yes':
         noDocbcCost = 1
@@ -165,7 +160,7 @@ if __name__ == '__main__':
 
 # DOUBLE CHECK MALE = 1, FEMALE = 0
     sex = st.radio(         
-    "Sex?",
+    "Gender?",
     ('Male', 'Female'), index=1)
     if sex == 'Male':
         sex = 1
@@ -181,10 +176,10 @@ if __name__ == '__main__':
         age = (age - 25)//5 + 2
     # st.write('''Calculated age value = ''', age)
 
-    weight = st.slider('How much do you weigh in pounds?', 0, 400, 150)
-    height = st.slider('What is your height in inches?', 0, 96, 69)
+    weight = st.slider('How much do you weigh in pounds?', 1, 400, 150)
+    height = st.slider('What is your height in inches?', 1, 96, 69)
     bmi = (weight*703) / (height **2)
-    st.write("You're bmi = ", round(bmi,2))
+    st.write("Your bmi = ", round(bmi,2))
 
 
     ed = st.radio(         
@@ -242,4 +237,4 @@ if __name__ == '__main__':
     # pred = pipe.predict_proba(x)  -- classifier
     pred = pipe.predict(x) # nn test
     # st.write('''You're likelyhood for heart disease is.... ''', 100*round(pred[0][1],3), '%') # boosting classifier
-    st.write('''You're likelyhood for heart disease is.... ''', 100 * pred.round(3), '%')
+    st.write('''Your likelihood for heart disease is.... ''', 100 * pred.round(3)[0][0], '%')
