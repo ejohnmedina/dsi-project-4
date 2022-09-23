@@ -244,5 +244,11 @@ if __name__ == '__main__':
     
     # if using classifier, comment out the above and uncomment the code below
     # pred = pipe.predict_proba(x)  -- classifier
+<<<<<<< HEAD
     # st.write('''You're likelyhood for heart disease is.... ''', 100*round(pred[0][1],3), '%') # boosting classifier models
     
+=======
+    pred = pipe.predict(x) # nn test
+    # st.write('''You're likelyhood for heart disease is.... ''', 100*round(pred[0][1],3), '%') # boosting classifier
+    st.write('''Your likelihood for heart disease is.... ''', 100 * pred.round(3)[0][0], '%')
+>>>>>>> main
