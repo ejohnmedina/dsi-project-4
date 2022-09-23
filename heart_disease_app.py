@@ -17,7 +17,8 @@ if __name__ == '__main__':
     this streamlit app. If you think you may have a medical emergency, call 911 or go to the nearest 
     emergency room immediately. No physician-patient relationship is created by this web site or its use.
      No contributor to this web site, makes any representations, 
-     express or implied, with respect to the information provided herein or to its use.''')
+     express or implied, with respect to the information provided herein or to its use.
+     (This disclaimer was adapted from https://www.uwmedicine.org/about/compliance/disclaimer)''')
     st.write('''Please modify the questions below to predict your likelihood for heart disease.''')
 
     with open('models/nn_focus.pkl', 'rb') as pickle_in:
@@ -67,16 +68,18 @@ if __name__ == '__main__':
 
     diabetes = st.radio(
     "Do you have diabetes?",
-    ('Yes', 'No'), index=1)
+    ('Yes', 'No','Only while pregnant'), index=1)
     if diabetes == 'Yes':
         diabetes = 1
-    else:
+    elif diabetes == 'No':
         diabetes = 0
+    else:
+        diabetes = 2
 
     exercise = st.radio(
     '''During the past month, other than your regular job, did you participate in any physical 
     activities or exercises such as running, calisthenics, golf, gardening, or walking for exercise?''',
-    ('Yes', 'No'), index=1)
+    ('Yes', 'No'), index=0)
     if exercise == 'Yes':
         exercise = 1
     else:
@@ -85,7 +88,7 @@ if __name__ == '__main__':
 
     fruits = st.radio(
     "Do you eat fruits regularly?",
-    ('Yes', 'No'), index=1)
+    ('Yes', 'No'), index=0)
     if fruits == 'Yes':
         fruits = 1
     else:
@@ -93,7 +96,7 @@ if __name__ == '__main__':
 
     veggies = st.radio(
     "Do you eat vegetables regularly?",
-    ('Yes', 'No'), index=1)
+    ('Yes', 'No'), index=0)
     if veggies == 'Yes':
         veggies = 1
     else:
@@ -110,7 +113,7 @@ if __name__ == '__main__':
 
     healthcare = st.radio(
     "Do you drink have healthcare?",
-    ('Yes', 'No'), index=1)
+    ('Yes', 'No'), index=0)
     if healthcare == 'Yes':
         healthcare = 1
     else:
@@ -176,8 +179,8 @@ if __name__ == '__main__':
         age = (age - 25)//5 + 2
     # st.write('''Calculated age value = ''', age)
 
-    weight = st.slider('How much do you weigh in pounds?', 1, 400, 150)
-    height = st.slider('What is your height in inches?', 1, 96, 69)
+    weight = st.slider('How much do you weigh in pounds?', 70, 400, 150)
+    height = st.slider('What is your height in inches?', 36, 96, 69)
     bmi = (weight*703) / (height **2)
     st.write("Your bmi = ", round(bmi,2))
 
@@ -206,7 +209,7 @@ if __name__ == '__main__':
     income = st.selectbox("What is your annual income?",
     ("Less than $10,000", "Between $10,000 and $15,000",  "Between $15,000 and $20,000",
      "Between $20,000 and $25,000",  "Between $25,000 and $35,000",  "Between $35,000 and $50,000",
-      "Between $50,000 and $75,000",  "Greater than $75,000"), index = 3)
+      "Between $50,000 and $75,000",  "Greater than $75,000"), index = 7)
     if income == 'Less than $10,000':
         income = 1
     elif income == 'Between $10,000 and $15,000':
@@ -224,6 +227,7 @@ if __name__ == '__main__':
     else:
         income = 8
 
+
     x = pd.DataFrame([[highBP, highChol, chol_check, bmi,
         smoker, stroke, diabetes, exercise, fruits, veggies,
         alcohol, healthcare, noDocbcCost, gen_health,
@@ -233,8 +237,18 @@ if __name__ == '__main__':
         'HvyAlcoholConsump', 'AnyHealthcare', 'NoDocbcCost', 'GenHlth',
         'MentHlth', 'PhysHlth', 'DiffWalk', 'Sex', 'Age', 'Education',
         'Income'])
-    # pipe_grad.predict_proba
+    pred = np.round(pipe.predict(x), 3) # nn test
+    st.write('''The neural model predicts that your risk for heart disease is.... ''', round(100 * pred[0][0], 3), '%')
+
+    st.write('''** This prediction is based on the model's training data and is not intended to be taken as medical advice or recommendation. As always, please see a qualified healthcare professional if you're experiencing any symptoms or have any concerns about your health.''')
+    
+    # if using classifier, comment out the above and uncomment the code below
     # pred = pipe.predict_proba(x)  -- classifier
+<<<<<<< HEAD
+    # st.write('''You're likelyhood for heart disease is.... ''', 100*round(pred[0][1],3), '%') # boosting classifier models
+    
+=======
     pred = pipe.predict(x) # nn test
     # st.write('''You're likelyhood for heart disease is.... ''', 100*round(pred[0][1],3), '%') # boosting classifier
     st.write('''Your likelihood for heart disease is.... ''', 100 * pred.round(3)[0][0], '%')
+>>>>>>> main
