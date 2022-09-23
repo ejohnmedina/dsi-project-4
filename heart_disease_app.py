@@ -17,7 +17,7 @@ if __name__ == '__main__':
      No contributor to this web site, makes any representations, 
      express or implied, with respect to the information provided herein or to its use. ''')
     st.write('''Please modify the questions below to predict your likelyhood for heart disease.''')
-    with open('models/grad_minority_focus.pkl', 'rb') as pickle_in:
+    with open('models/xgb_minority_focus.pkl', 'rb') as pickle_in:
         pipe = pickle.load(pickle_in)
 
     highBP = st.radio(
