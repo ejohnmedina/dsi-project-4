@@ -19,7 +19,8 @@ if __name__ == '__main__':
      No contributor to this web site, makes any representations, 
      express or implied, with respect to the information provided herein or to its use. ''')
     st.write('''Please modify the questions below to predict your likelyhood for heart disease.''')
-    with open('models/ada_minority_focus.pkl', 'rb') as pickle_in:
+
+    with open('models/nn_focus.pkl', 'rb') as pickle_in:
         pipe = pickle.load(pickle_in)
 
     highBP = st.radio(
@@ -238,16 +239,7 @@ if __name__ == '__main__':
         'MentHlth', 'PhysHlth', 'DiffWalk', 'Sex', 'Age', 'Education',
         'Income'])
     # pipe_grad.predict_proba
-    pred = pipe.predict_proba(x)
-    st.write('''You're likelyhood for heart disease is.... ''', 100*round(pred[0][1],3), '%')
-
-# x
-
-
-
-
-    #       # try:
-    #     st.write(f'Your text is most like: {pipe.predict([text])[0]}')
-    # except:
-    #     pass
-
+    # pred = pipe.predict_proba(x)  -- classifier
+    pred = pipe.predict(x) # nn test
+    # st.write('''You're likelyhood for heart disease is.... ''', 100*round(pred[0][1],3), '%') # boosting classifier
+    st.write('''You're likelyhood for heart disease is.... ''', 100*round(pred,3), '%')
