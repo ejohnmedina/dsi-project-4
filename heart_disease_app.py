@@ -2,9 +2,20 @@ import streamlit as st
 import pickle
 import pandas as pd
 import numpy as np
+import sklearn
 
 if __name__ == '__main__':
     st.title('Heart Disease Prediction ')
+    st.write('''This web site is provided for educational and informational purposes only 
+    and does not constitute providing medical advice or professional services. 
+    The information provided should not be used for diagnosing or treating a health problem or disease, 
+    and those seeking personal medical advice should consult with a licensed physician. 
+    Always seek the advice of your doctor or other qualified health provider regarding a medical condition. 
+    Never disregard professional medical advice or delay in seeking it because of something you have read on 
+    this streamlit app. If you think you may have a medical emergency, call 911 or go to the nearest 
+    emergency room immediately. No physician-patient relationship is created by this web site or its use.
+     No contributor to this web site, makes any representations, 
+     express or implied, with respect to the information provided herein or to its use. ''')
     st.write('''Please modify the questions below to predict your likelyhood for heart disease.''')
     with open('models/grad_minority_focus.pkl', 'rb') as pickle_in:
         pipe = pickle.load(pickle_in)
