@@ -3,6 +3,8 @@ import pickle
 import pandas as pd
 import numpy as np
 import sklearn
+import xgboost
+
 
 if __name__ == '__main__':
     st.title('Heart Disease Prediction ')
@@ -17,6 +19,7 @@ if __name__ == '__main__':
      No contributor to this web site, makes any representations, 
      express or implied, with respect to the information provided herein or to its use. ''')
     st.write('''Please modify the questions below to predict your likelyhood for heart disease.''')
+
     with open('models/nn_focus.pkl', 'rb') as pickle_in:
         pipe = pickle.load(pickle_in)
 
