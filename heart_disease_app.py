@@ -18,7 +18,7 @@ if __name__ == '__main__':
     emergency room immediately. No physician-patient relationship is created by this web site or its use.
      No contributor to this web site, makes any representations, 
      express or implied, with respect to the information provided herein or to its use.
-     (This disclaimer was adapted from https://www.uwmedicine.org/about/compliance/disclaimer)''')
+     \n(This disclaimer was adapted from https://www.uwmedicine.org/about/compliance/disclaimer)''')
     st.write('''Please modify the questions below to predict your likelihood for heart disease.''')
 
     with open('models/nn_focus.pkl', 'rb') as pickle_in:
@@ -237,11 +237,11 @@ if __name__ == '__main__':
         'HvyAlcoholConsump', 'AnyHealthcare', 'NoDocbcCost', 'GenHlth',
         'MentHlth', 'PhysHlth', 'DiffWalk', 'Sex', 'Age', 'Education',
         'Income'])
-    pred = pipe.predict(x) # nn test
-    st.write('''The neural model predicts that your risk for heart disease is.... ''', round(100 * pred[0][0], 3), '%')
+     pred = pipe.predict(x) # nn test
+     st.write('''The neural model predicts that your risk for heart disease is.... ''', round(100 * pred[0][0], 3), '%')
+
+    # if using classifier, comment out the above and uncomment the code below
+    #pred = pipe.predict_proba(x)#  -- classifier
+    #st.write('''The model pridicts that your risk for heart disease is.... ''', 100*round(pred[0][1],3), '%') # boosting classifier models
 
     st.write('''** This prediction is based on the model's training data and is not intended to be taken as medical advice or recommendation. As always, please see a qualified healthcare professional if you're experiencing any symptoms or have any concerns about your health.''')
-    
-    # if using classifier, comment out the above and uncomment the code below
-    # pred = pipe.predict_proba(x)  -- classifier
-    # st.write('''The model pridicts that your risk for heart disease is.... ''', 100*round(pred[0][1],3), '%') # boosting classifier models
