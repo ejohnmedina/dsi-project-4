@@ -237,8 +237,8 @@ if __name__ == '__main__':
         'HvyAlcoholConsump', 'AnyHealthcare', 'NoDocbcCost', 'GenHlth',
         'MentHlth', 'PhysHlth', 'DiffWalk', 'Sex', 'Age', 'Education',
         'Income'])
-     pred = pipe.predict(x) # nn test
-     st.write('''The neural model predicts that your risk for heart disease is.... ''', round(100 * pred[0][0], 3), '%')
+    pred = pipe.predict(x) # nn test
+    st.write('''The neural model predicts that your risk for heart disease is.... ''', round(100 * pred[0][0], 3), '%')
 
     # if using classifier, comment out the above and uncomment the code below
     #pred = pipe.predict_proba(x)#  -- classifier
