@@ -112,7 +112,7 @@ if __name__ == '__main__':
         alcohol = 0
 
     healthcare = st.radio(
-    "Do you drink have healthcare?",
+    "Do you have healthcare?",
     ('Yes', 'No'), index=0)
     if healthcare == 'Yes':
         healthcare = 1
