@@ -56,7 +56,7 @@ The data we used was a popular dataset that we found on Kaggle. Most of the data
 
 ## Modeling Process
 Our best models we ended up with were a XGBoost and neural network that ended up performing each around  
--dont know which models were going with so hard to answer this part *** REVISE
+-Used Neural Network as our main model in the streamlit app
 -Due to the imbalanced classifications (90% no heart disease and 10% heart disease), our first models predominatly predicted 0. We were getting scores of 90% so we thought our model was working well. We realized that our model was faulty when we compared the true values with the predicted values through a confusion matrix. Our models were heavily predicting 0 "no heart disease". Our solution was to take a smaller sample of the majority class and fit our models on a 50/50 split of the data. Our overall performance decreased to just under 80%, but we now how balanced predictions. 
 
 ---
@@ -65,6 +65,6 @@ Our best models we ended up with were a XGBoost and neural network that ended up
 - Pandas
 - Scikit-learn
 - TensorFlow
-not sure how specific we need to get here
+
 
 
